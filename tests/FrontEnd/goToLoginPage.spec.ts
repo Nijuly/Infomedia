@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/MainPage';
 import { RegisterPage } from '../../pages/RegisterPage';
 
-test('Go to registration', async ({ page }) => {
+test('Go to Login page', async ({ page }) => {
     const mainPage = new MainPage(page);
     const registerPage = new RegisterPage(page);
     await mainPage.goTo();
