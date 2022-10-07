@@ -1,11 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { BasePage } from './BasePage';
-
-interface RegisterData {
-    email: string,
-    password: string,
-    confirmPassword: string
-};
+import { RegisterData } from '../utilities/Interfaces';
 
 export class RegisterPage extends BasePage {
     protected readonly page: Page;
@@ -35,19 +30,15 @@ export class RegisterPage extends BasePage {
         this.summaryErrors = page.locator('.validation-summary-errors');
     }
 
-    async goTo() {
-        await this.page.goto("https://account.reverso.net/Account/Register");
-    }
-
-    async registrate(data: RegisterData) {
+    async registrate(data: RegisterData): Promise<void> {
         await this.inputEmail.type(data.email);
         await this.inputPassword.type(data.password);
         await this.inputConfirmPassword.type(data.confirmPassword);
         await this.singUpButton.click();
     }
 
-    async checkingSummaryErrors(data: object) {
-        const count = await this.summaryErrors.locator('ul li').count();
+    async checkingSummaryErrors(data: object): Promise<void> {
+        const count: number = await this.summaryErrors.locator('ul li').count();
         for (let i = 0; i < count; i++) {
             await expect(this.summaryErrors.locator('ul li').nth(i)).toHaveText(data[i]);
         }

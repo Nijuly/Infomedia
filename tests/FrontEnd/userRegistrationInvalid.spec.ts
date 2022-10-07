@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { RegisterPage } from '../../pages/RegisterPage';
-import { data } from '../../fixtures/userRegistrationInvalid/TestData'
+import { data, url } from '../../fixtures/userRegistrationInvalid/TestData'
 
 test.describe('User registration', () => {
 
     test('Register user with empty fields', async ({ page }) => {
         const registerPage = new RegisterPage(page);
-        await registerPage.goTo();
+        await registerPage.goTo(url);
         await expect(registerPage.registerForm).toBeVisible();
         await registerPage.registrate(data[0]);
         await expect(registerPage.emailError).toBeVisible();
@@ -22,7 +22,7 @@ test.describe('User registration', () => {
     for (let set of data) {
         test(`Register user with ${set.testName}`, async ({ page }) => {
             const registerPage = new RegisterPage(page);
-            await registerPage.goTo();
+            await registerPage.goTo(url);
             await expect(registerPage.registerForm).toBeVisible();
             await registerPage.registrate(set);
             await expect(registerPage.summaryErrors).toBeVisible();

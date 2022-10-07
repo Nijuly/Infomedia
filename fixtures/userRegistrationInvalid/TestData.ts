@@ -34,5 +34,6 @@ const data: any[] = [
     },
 ]
 
-export { data };
+const url: string = "https://account.reverso.net/Account/Register";
+export { data, url };
 

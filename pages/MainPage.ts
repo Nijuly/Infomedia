@@ -21,11 +21,7 @@ export class MainPage extends BasePage {
         this.LoginMenuTab = page.locator('button.app-popup-menu-view__menu__item');
     }
 
-    async goTo() {
-        await this.page.goto("https://www.reverso.net");
-    }
-
-    async agreePopUp() {
+    async agreePopUp(): Promise<void> {
         await this.popup.waitFor();
 
         if (await this.popup.isVisible() === true) {
@@ -34,8 +30,8 @@ export class MainPage extends BasePage {
         }
     }
 
-    async clickOnLoginMenuTab(tab: string) {
-        const count = await this.LoginMenuTab.count();
+    async clickOnLoginMenuTab(tab: string): Promise<void> {
+        const count: number = await this.LoginMenuTab.count();
         for (let i = 0; i < count; i++) {
             if (this.LoginMenuTab.nth(i), { hasText: `${tab}` }) {
                 this.LoginMenuTab.nth(i).click();

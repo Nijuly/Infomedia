@@ -15,11 +15,7 @@ export class LoginPage {
         this.loginButton = page.locator('.btn-submit');
     }
 
-    async goTo() {
-        await this.page.goto("https://account.reverso.net/Account/Login");
-    }
-
-    async login(email: string, password: string) {
+    async login(email: string, password: string): Promise<void> {
         await this.inputEmail.type(email);
         await this.inputPassword.type(password);
         await this.loginButton.click();

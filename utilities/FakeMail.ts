@@ -11,11 +11,11 @@ export class FakeMale {
         this.mail = page.locator('div#email-address');
     }
 
-    async goTo() {
+    async goTo():Promise<void> {
         await this.page.goto("https://www.moakt.com");
     }
 
-    async getFakeMail() {
+    async getFakeMail():Promise<string|null> {
         await this.goTo();
         await this.getMailButton.click();
         return await this.mail.textContent();
